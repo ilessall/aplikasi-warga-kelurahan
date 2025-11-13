@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Tambah Warga Baru</title>
+    <title>{% if object %}Edit Warga{% else %}Tambah Warga{% endif %}</title>
 </head>
 <body>
-    <h1>Form Warga Baru</h1>
+    <h1>{% if object %}Edit Warga{% else %}Tambah Warga{% endif %}</h1>
+
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Simpan</button>
+        <button type="submit">{% if object %}Update{% else %}Simpan{% endif %}</button>
     </form>
 
-    <hr>
-    <a href="{% url 'warga-list' %}">⬅ Kembali ke Daftar Warga</a>
+    <a href="{% url 'warga:warga-list' %}">⬅ Kembali ke Daftar Warga</a>
 </body>
 </html>

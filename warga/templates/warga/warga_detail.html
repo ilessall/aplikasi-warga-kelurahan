@@ -4,35 +4,37 @@
     <title>Detail Warga - {{ object.nama_lengkap }}</title>
 </head>
 <body>
-    <h1>Detail Warga</h1>
+    <h1>Detail Warga: {{ object.nama_lengkap }}</h1>
 
     <p><strong>Nama Lengkap:</strong> {{ object.nama_lengkap }}</p>
     <p><strong>NIK:</strong> {{ object.nik }}</p>
     <p><strong>Alamat:</strong> {{ object.alamat }}</p>
-    <p><strong>Nomor Telepon:</strong> {{ object.no_telepon }}</p>
+    <p><strong>No. Telepon:</strong> {{ object.no_telepon }}</p>
     <p><strong>Tanggal Registrasi:</strong> {{ object.tanggal_registrasi|date:"d M Y H:i" }}</p>
 
-    <a href="{% url 'warga-list' %}">⬅ Kembali ke Daftar Warga</a>
+    <!-- Link Edit dan Hapus -->
+    <a href="{% url 'warga:warga-edit' object.pk %}">✏ Edit Data</a> |
+    <a href="{% url 'warga:warga-hapus' object.pk %}">🗑 Hapus Data</a> |
+    <a href="{% url 'warga:warga-list' %}">⬅ Kembali ke Daftar Warga</a>
 
     <hr>
     <h2>Daftar Pengaduan oleh {{ object.nama_lengkap }}</h2>
-
     <ul>
         {% for aduan in object.pengaduan.all %}
             <li>
-                <strong>{{ aduan.judul }}</strong> 
-                (Status: {{ aduan.get_status_display }})
+                <strong>{{ aduan.judul }}</strong> (Status: {{ aduan.get_status_display }})
                 <p>{{ aduan.deskripsi }}</p>
-                <small>Dilaporkan pada: {{ aduan.tanggal_lapor|date:"d M Y H:i" }}</small>
+                <small>Dilaporkan: {{ aduan.tanggal_lapor|date:"d M Y H:i" }}</small>
+                <!-- Link edit/hapus pengaduan -->
+                [<a href="{% url 'warga:pengaduan-edit' aduan.pk %}">Edit</a> |
+                 <a href="{% url 'warga:pengaduan-hapus' aduan.pk %}">Hapus</a>]
             </li>
         {% empty %}
-            <li>Warga ini belum pernah membuat pengaduan.</li>
+            <li>Belum ada pengaduan.</li>
         {% endfor %}
     </ul>
 
-    <hr>
-    <p>
-        📋 <a href="{% url 'pengaduan-list' %}">Lihat Semua Pengaduan</a>
-    </p>
+    <p><a href="{% url 'warga:pengaduan-list' %}">📋 Lihat Semua Pengaduan</a> | 
+       <a href="{% url 'warga:pengaduan-tambah' %}">➕ Tambah Pengaduan Baru</a></p>
 </body>
 </html>

@@ -7,16 +7,16 @@
     <h1>Daftar Warga</h1>
 
     <!-- Link untuk tambah warga baru -->
-    <a href="{% url 'warga-tambah' %}">➕ Tambah Warga Baru</a> |
+    <a href="{% url 'warga:warga-tambah' %}">➕ Tambah Warga Baru</a> |
     <!-- Link ke daftar pengaduan -->
-    <a href="{% url 'pengaduan-list' %}">📋 Daftar Pengaduan</a>
+    <a href="{% url 'warga:pengaduan-list' %}">📋 Daftar Pengaduan</a>
     
     <hr>
 
     <ul>
         {% for warga in object_list %}
             <li>
-                <a href="{% url 'warga-detail' warga.pk %}">
+                <a href="{% url 'warga:warga-detail' warga.pk %}">
                     {{ warga.nama_lengkap }}
                 </a> - NIK: {{ warga.nik }}
             </li>
