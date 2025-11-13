@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Daftar Semua Pengaduan</title>
+</head>
+<body>
+    <h1>Daftar Semua Pengaduan</h1>
+
+    <ul>
+        {% for aduan in pengaduan_list %}
+            <li>
+                <strong>{{ aduan.judul }}</strong><br>
+                oleh <em>{{ aduan.pelapor.nama_lengkap }}</em><br>
+                Status: {{ aduan.get_status_display }}<br>
+                <p>{{ aduan.deskripsi }}</p>
+                <small>Dilaporkan pada: {{ aduan.tanggal_lapor|date:"d M Y H:i" }}</small>
+            </li>
+        {% empty %}
+            <li>Belum ada pengaduan yang tercatat.</li>
+        {% endfor %}
+    </ul>
+
+    <hr>
+    <a href="{% url 'warga-list' %}">⬅ Kembali ke Daftar Warga</a> |
+    <a href="{% url 'pengaduan-tambah' %}">➕ Tambah Pengaduan Baru</a>
+</body>
+</html>
