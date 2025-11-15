@@ -2,6 +2,9 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.urls import reverse_lazy
 from .models import Warga, Pengaduan
 from .forms import WargaForm, PengaduanForm
+from rest_framework.generics import ListAPIView
+from rest_framework import generics
+from .serializers import WargaSerializer, PengaduanSerializer
 
 # Warga Views
 class WargaListView(ListView):
@@ -51,3 +54,15 @@ class PengaduanDeleteView(DeleteView):
     model = Pengaduan
     template_name = 'warga/pengaduan_confirm_delete.html'
     success_url = reverse_lazy('warga:pengaduan-list')
+
+class WargaListAPIView(ListAPIView):
+    queryset = Warga.objects.all()
+    serializer_class = WargaSerializer
+
+class WargaListCreateAPI(generics.ListCreateAPIView):
+    queryset = Warga.objects.all()
+    serializer_class = WargaSerializer
+
+class WargaDetailAPI(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Warga.objects.all()
+    serializer_class = WargaSerializer
