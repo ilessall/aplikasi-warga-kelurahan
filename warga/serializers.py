@@ -10,4 +10,11 @@ class WargaSerializer(serializers.ModelSerializer):
 class PengaduanSerializer(serializers.ModelSerializer):
     class Meta:
         model = Pengaduan
-        fields = ['id', 'nama', 'judul_laporan', 'deskripsi', 'tanggal']  
+        fields = [
+            'id',
+            'judul',
+            'deskripsi',
+            'status',
+            'tanggal_lapor',
+            'pelapor'
+        ]
